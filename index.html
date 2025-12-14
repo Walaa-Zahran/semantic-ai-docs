@@ -4,19 +4,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>FlowPilot — Ship updates faster</title>
-    <meta name="description" content="A clean SaaS landing page: hero, features, testimonials, pricing, and FAQ." />
+    <title>DocMint — AI document processing</title>
+    <meta name="description" content="A minimal AI SaaS landing page: hero, use-cases, metrics, FAQ, and CTA." />
     <style>
         :root {
-            --bg: #0b0d12;
-            --card: #121623;
-            --text: #e8ebf5;
-            --muted: #a8b0c7;
-            --line: #232a3d;
-            --accent: #7c5cff;
+            --bg: #07090f;
+            --surface: #0f1422;
+            --text: #f3f5ff;
+            --muted: #bac3dd;
+            --line: #232a41;
+            --accent: #a78bfa;
+            --accent2: #22c55e;
 
+            /* responsive spacing + sizing */
             --wrap: 1100px;
-            --pad: 24px;
+            --pad: clamp(16px, 3vw, 28px);
+            --section: clamp(28px, 5vw, 56px);
+            --gap: clamp(12px, 2.2vw, 18px);
             --radius: 18px;
         }
 
@@ -24,42 +28,34 @@
             box-sizing: border-box
         }
 
-        html {
-            scroll-behavior: smooth
+        html,
+        body {
+            height: 100%
         }
 
         body {
             margin: 0;
-            font: 16px/1.5 system-ui, Segoe UI, Roboto, Arial, sans-serif;
-            background: radial-gradient(900px 400px at 15% -10%, rgba(124, 92, 255, .35), transparent 60%), var(--bg);
+            font: 16px/1.6 system-ui, Segoe UI, Roboto, Arial;
+            background:
+                radial-gradient(700px 400px at 50% -10%, rgba(167, 139, 250, .35), transparent 60%),
+                radial-gradient(700px 400px at 85% 10%, rgba(34, 197, 94, .18), transparent 60%),
+                var(--bg);
             color: var(--text);
             overflow-x: hidden;
-        }
-
-        a {
-            color: inherit
         }
 
         .wrap {
             max-width: var(--wrap);
             margin: 0 auto;
-            padding: var(--pad);
+            padding: var(--pad)
         }
 
-        /* Header */
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            padding: 14px var(--pad);
-            margin: 0 calc(var(--pad) * -1);
-            background: rgba(11, 13, 18, .75);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(35, 42, 61, .6);
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .brand {
@@ -67,270 +63,133 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
-            min-width: max-content;
+            color: inherit
         }
 
-        .logo {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, var(--accent), #34d399);
-            flex: 0 0 auto;
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: var(--accent)
         }
 
-        nav ul {
-            list-style: none;
+        nav {
             display: flex;
-            gap: 16px;
-            margin: 0;
-            padding: 0;
-            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px
         }
 
         nav a {
-            opacity: .9;
             text-decoration: none;
-            padding: 10px 10px;
-            border-radius: 10px;
-            display: inline-block;
+            color: var(--muted);
+            padding: 6px 8px;
+            border-radius: 10px
         }
 
         nav a:hover {
-            opacity: 1;
-            background: rgba(255, 255, 255, .04)
+            color: var(--text);
+            background: rgba(255, 255, 255, .05)
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: .5rem;
             padding: 10px 14px;
             border-radius: 12px;
             border: 1px solid var(--line);
-            background: transparent;
             text-decoration: none;
+            color: var(--text);
             white-space: nowrap;
         }
 
         .btn.primary {
-            background: linear-gradient(135deg, var(--accent), #34d399);
             border: none;
-            color: #081018;
-            font-weight: 700;
-        }
-
-        /* Mobile nav (CSS-only) */
-        .nav-toggle {
-            display: none;
-            appearance: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            border: 1px solid var(--line);
-            background: rgba(0, 0, 0, .12);
-            cursor: pointer;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-        }
-
-        .nav-toggle span {
-            width: 18px;
-            height: 2px;
-            background: var(--text);
-            position: relative;
-            display: block;
-            border-radius: 999px;
-        }
-
-        .nav-toggle span::before,
-        .nav-toggle span::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            width: 18px;
-            height: 2px;
-            background: var(--text);
-            border-radius: 999px;
-        }
-
-        .nav-toggle span::before {
-            top: -6px
-        }
-
-        .nav-toggle span::after {
-            top: 6px
-        }
-
-        #navcheck {
-            position: absolute;
-            left: -9999px
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #061015;
+            font-weight: 800;
         }
 
         main {
-            padding: 56px 0
+            padding: var(--section) 0
         }
 
-        /* Hero */
         .hero {
             display: grid;
             grid-template-columns: 1.15fr .85fr;
-            gap: 28px;
+            gap: var(--gap);
             align-items: center;
         }
 
-        .hero h1 {
-            font-size: clamp(32px, 4vw, 54px);
+        h1 {
+            font-size: clamp(32px, 4vw, 50px);
             line-height: 1.05;
-            margin: 0 0 12px;
-            letter-spacing: -.02em;
+            margin: 0 0 12px
         }
 
-        .hero p {
-            margin: 0 0 18px;
-            color: var(--muted);
-            max-width: 60ch;
-        }
-
-        .hero .actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        .pill {
-            display: inline-flex;
-            gap: 10px;
-            align-items: center;
-            border: 1px solid var(--line);
-            border-radius: 999px;
-            padding: 8px 12px;
-            color: var(--muted);
-            width: max-content;
-            max-width: 100%;
-        }
-
-        .panel {
-            background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .02));
-            border: 1px solid var(--line);
-            border-radius: 22px;
-            padding: 18px;
-        }
-
-        .kpis {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px;
-            margin-top: 14px;
-        }
-
-        .kpi {
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 12px;
-            background: rgba(0, 0, 0, .15);
-            min-width: 0;
-        }
-
-        .kpi strong {
-            display: block;
-            font-size: 20px
-        }
-
-        section {
-            padding: 40px 0;
-            border-top: 1px solid var(--line);
-        }
-
-        h2 {
+        p {
             margin: 0 0 14px;
-            font-size: 26px
-        }
-
-        /* Fluid grids */
-        .grid3 {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 14px;
-        }
-
-        .pricing {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 14px;
+            color: var(--muted);
+            max-width: 62ch
         }
 
         .card {
-            background: var(--card);
+            background: rgba(15, 20, 34, .9);
             border: 1px solid var(--line);
             border-radius: var(--radius);
-            padding: 16px;
+            padding: clamp(14px, 2.2vw, 18px);
             min-width: 0;
+            /* prevents overflow in grids */
         }
 
-        .card h3 {
-            margin: 0 0 6px
+        section {
+            padding: var(--section) 0;
+            border-top: 1px solid var(--line)
         }
 
-        .card p {
-            margin: 0;
-            color: var(--muted)
+        h2 {
+            margin: 0 0 12px;
+            font-size: 24px
         }
 
-        .quote {
-            display: flex;
-            flex-direction: column;
-            gap: 10px
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
         }
 
-        .quote blockquote {
-            margin: 0;
-            color: var(--text)
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 10px;
         }
 
-        .quote footer {
-            color: var(--muted);
-            font-size: 14px
-        }
-
-        .price {
-            display: flex;
-            flex-direction: column;
-            gap: 10px
-        }
-
-        .price .money {
-            font-size: 34px;
-            font-weight: 800
-        }
-
-        .list {
-            margin: 0;
-            padding-left: 18px;
-            color: var(--muted)
-        }
-
-        .cta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            background: linear-gradient(135deg, rgba(124, 92, 255, .25), rgba(52, 211, 153, .18));
+        .metric {
             border: 1px solid var(--line);
-            border-radius: 22px;
-            padding: 18px;
-            flex-wrap: wrap;
+            border-radius: 16px;
+            padding: 12px
         }
 
-        .cta p {
-            margin: 0;
-            color: var(--muted)
+        .metric strong {
+            display: block;
+            font-size: 22px
         }
 
-        .cta>div {
-            min-width: min(560px, 100%)
+        details {
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 12px;
+            background: rgba(0, 0, 0, .12);
+        }
+
+        details+details {
+            margin-top: 10px
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700
         }
 
         footer {
@@ -338,93 +197,48 @@
             color: var(--muted)
         }
 
-        .sr-only {
-            position: absolute;
-            left: -9999px
-        }
-
-        /* Responsive breakpoints */
-        @media (max-width: 980px) {
+        /* --- Responsive improvements --- */
+        @media (max-width: 900px) {
             .hero {
                 grid-template-columns: 1fr
             }
 
-            main {
-                padding: 40px 0
+            /* keep preview card below the hero text on mobile */
+            .hero>aside {
+                order: 2
+            }
+
+            .hero>div {
+                order: 1
+            }
+
+            .grid {
+                grid-template-columns: 1fr
+            }
+
+            .metrics {
+                grid-template-columns: 1fr
             }
         }
 
-        @media (max-width: 760px) {
-            :root {
-                --pad: 18px
-            }
-
-            /* turn into mobile header */
-            .nav-toggle {
-                display: inline-flex
+        @media (max-width: 560px) {
+            header {
+                align-items: flex-start
             }
 
             nav {
-                position: relative
-            }
-
-            /* hide desktop nav by default */
-            nav ul {
-                position: absolute;
-                right: 0;
-                top: 54px;
-                width: min(260px, calc(100vw - 36px));
-                flex-direction: column;
-                gap: 6px;
-                padding: 10px;
-                border: 1px solid var(--line);
-                background: rgba(18, 22, 35, .96);
-                border-radius: 16px;
-                display: none;
-            }
-
-            nav a {
                 width: 100%
-            }
-
-            /* checkbox controls menu */
-            #navcheck:checked~nav ul {
-                display: flex
-            }
-
-            /* stack grids */
-            .grid3,
-            .pricing {
-                grid-template-columns: 1fr
-            }
-
-            .kpis {
-                grid-template-columns: repeat(2, minmax(0, 1fr))
-            }
-        }
-
-        @media (max-width: 420px) {
-            .kpis {
-                grid-template-columns: 1fr
             }
 
             .btn {
                 width: 100%
             }
 
-            .hero .actions .btn {
+            header>.btn {
                 width: auto
             }
 
-            /* keep hero buttons inline when possible */
-            .hero .actions {
-                flex-direction: column;
-                align-items: stretch
-            }
-
-            .hero .actions .btn {
-                width: 100%
-            }
+            /* keep "Sign in" natural width if possible */
         }
     </style>
 </head>
@@ -433,161 +247,114 @@
     <div class="wrap">
         <header>
             <a class="brand" href="#">
-                <span class="logo" aria-hidden="true"></span>
-                <strong>FlowPilot</strong>
+                <span class="dot" aria-hidden="true"></span>
+                <strong>DocMint</strong>
             </a>
 
-            <!-- mobile menu toggle -->
-            <input id="navcheck" type="checkbox" aria-hidden="true">
-            <label class="nav-toggle" for="navcheck" aria-label="Toggle menu">
-                <span aria-hidden="true"></span>
-            </label>
-
             <nav aria-label="Primary">
-                <ul>
-                    <li><a href="#features" onclick="document.getElementById('navcheck').checked=false">Features</a>
-                    </li>
-                    <li><a href="#proof" onclick="document.getElementById('navcheck').checked=false">Proof</a></li>
-                    <li><a href="#pricing" onclick="document.getElementById('navcheck').checked=false">Pricing</a></li>
-                    <li><a class="btn" href="#pricing" onclick="document.getElementById('navcheck').checked=false">Sign
-                            in</a></li>
-                </ul>
+                <a href="#use-cases">Use cases</a>
+                <a href="#faq">FAQ</a>
+                <a href="#start">Start</a>
             </nav>
 
-            <!-- desktop sign in -->
-            <a class="btn" href="#pricing" style="display:none" id="desktopSignIn">Sign in</a>
+            <a class="btn" href="#start">Sign in</a>
         </header>
 
         <main>
-            <section class="hero" aria-labelledby="hero-title">
+            <section class="hero" aria-labelledby="title">
                 <div>
-                    <div class="pill" role="note">✨ New: Release notes that write themselves</div>
-                    <h1 id="hero-title">Ship product updates faster—without the busywork.</h1>
-                    <p>
-                        FlowPilot turns decisions into tasks, tasks into checklists, and checklists into shipped
-                        releases.
-                        Keep everyone aligned with a simple, calm workflow.
+                    <p
+                        style="display:inline-flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:999px;padding:8px 12px">
+                        <span aria-hidden="true">📄</span>
+                        <span>Extract data from documents in seconds</span>
                     </p>
-                    <div class="actions">
-                        <a class="btn primary" href="#pricing">Start free</a>
-                        <a class="btn" href="#features">See how it works</a>
+
+                    <h1 id="title">Turn PDFs into structured data your team can use.</h1>
+
+                    <p>
+                        DocMint reads invoices, IDs, and contracts—then outputs clean fields, validations, and
+                        summaries.
+                        Keep humans in the loop only when needed.
+                    </p>
+
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px">
+                        <a class="btn primary" href="#start">Try a sample file</a>
+                        <a class="btn" href="#use-cases">See use cases</a>
                     </div>
-                    <p class="sr-only">Scroll for features, testimonials, and pricing.</p>
                 </div>
 
-                <aside class="panel" aria-label="Product snapshot">
-                    <h2 style="margin:0 0 10px;font-size:18px;">This week at a glance</h2>
-                    <div class="kpis">
-                        <div class="kpi"><strong>12</strong><span style="color:var(--muted)">merged PRs</span></div>
-                        <div class="kpi"><strong>3</strong><span style="color:var(--muted)">releases</span></div>
-                        <div class="kpi"><strong>94%</strong><span style="color:var(--muted)">on-time</span></div>
+                <aside class="card" aria-label="Example extraction output (text)">
+                    <h2 style="margin:0 0 8px;font-size:18px">Extraction preview</h2>
+                    <div class="metrics">
+                        <div class="metric"><strong>98.4%</strong><span style="color:var(--muted)">field accuracy</span>
+                        </div>
+                        <div class="metric"><strong>2.1s</strong><span style="color:var(--muted)">avg. processing</span>
+                        </div>
+                        <div class="metric"><strong>0–3</strong><span style="color:var(--muted)">human checks</span>
+                        </div>
                     </div>
                     <div
-                        style="margin-top:14px;border:1px dashed var(--line);border-radius:16px;padding:12px;color:var(--muted)">
-                        <strong style="color:var(--text)">Next:</strong> “Customer portal v2” kickoff — Mon 10:00
+                        style="margin-top:12px;border:1px dashed var(--line);border-radius:16px;padding:12px;color:var(--muted)">
+                        <strong style="color:var(--text)">Output:</strong> JSON • CSV • Webhook
                     </div>
                 </aside>
             </section>
 
-            <section id="features" aria-labelledby="features-title">
-                <h2 id="features-title">Everything you need to stay in motion</h2>
-                <div class="grid3">
+            <section id="use-cases" aria-labelledby="use-title">
+                <h2 id="use-title">Common use cases</h2>
+                <div class="grid">
                     <article class="card">
-                        <h3>One-click planning</h3>
-                        <p>Turn notes into a scoped plan with owners, dates, and dependencies.</p>
+                        <h3 style="margin:0 0 6px">Invoices</h3>
+                        <p>Vendor, totals, VAT, line items—validated and export-ready.</p>
                     </article>
                     <article class="card">
-                        <h3>Clean status updates</h3>
-                        <p>Auto-generate weekly updates from activity—no spreadsheet juggling.</p>
+                        <h3 style="margin:0 0 6px">Identity docs</h3>
+                        <p>Pull fields, detect missing data, and flag anomalies for review.</p>
                     </article>
                     <article class="card">
-                        <h3>Release-ready checklists</h3>
-                        <p>Ship with confidence using reusable QA, security, and launch steps.</p>
+                        <h3 style="margin:0 0 6px">Contracts</h3>
+                        <p>Summaries, key dates, clauses, and searchable highlights.</p>
                     </article>
                 </div>
             </section>
 
-            <section id="proof" aria-labelledby="proof-title">
-                <h2 id="proof-title">Teams use FlowPilot to ship calmly</h2>
-                <div class="grid3">
-                    <figure class="card quote">
-                        <blockquote>“We cut our release prep time in half and stopped missing handoffs.”</blockquote>
-                        <footer>— Sam, Product Ops</footer>
-                    </figure>
-                    <figure class="card quote">
-                        <blockquote>“The workflow is simple enough that people actually use it.”</blockquote>
-                        <footer>— Noor, Engineering Manager</footer>
-                    </figure>
-                    <figure class="card quote">
-                        <blockquote>“Updates write themselves. Stakeholders love the clarity.”</blockquote>
-                        <footer>— Lina, PM</footer>
-                    </figure>
-                </div>
+            <section id="faq" aria-labelledby="faq-title">
+                <h2 id="faq-title">FAQ</h2>
+                <details>
+                    <summary>Do you store my documents?</summary>
+                    <p>By default, files are processed and discarded after completion. You can enable retention if your
+                        workflow needs it.</p>
+                </details>
+                <details>
+                    <summary>Can I review low-confidence fields?</summary>
+                    <p>Yes—route uncertain fields to a lightweight review screen and capture corrections for future
+                        runs.</p>
+                </details>
+                <details>
+                    <summary>How do I integrate?</summary>
+                    <p>Upload via API, then receive structured output via webhook or download as JSON/CSV.</p>
+                </details>
             </section>
 
-            <section id="pricing" aria-labelledby="pricing-title">
-                <h2 id="pricing-title">Simple pricing</h2>
-                <div class="pricing">
-                    <article class="card price">
-                        <h3>Starter</h3>
-                        <div class="money">$0</div>
-                        <ul class="list">
-                            <li>1 workspace</li>
-                            <li>Up to 3 projects</li>
-                            <li>Basic templates</li>
-                        </ul>
-                        <a class="btn" href="#">Create account</a>
-                    </article>
-
-                    <article class="card price" style="outline:2px solid rgba(124,92,255,.5)">
-                        <h3>Team</h3>
-                        <div class="money">$12<span style="font-size:14px;color:var(--muted)">/user</span></div>
-                        <ul class="list">
-                            <li>Unlimited projects</li>
-                            <li>Auto status updates</li>
-                            <li>Shared checklists</li>
-                        </ul>
-                        <a class="btn primary" href="#">Start trial</a>
-                    </article>
-
-                    <article class="card price">
-                        <h3>Business</h3>
-                        <div class="money">$29<span style="font-size:14px;color:var(--muted)">/user</span></div>
-                        <ul class="list">
-                            <li>Permissions & audit</li>
-                            <li>Advanced templates</li>
-                            <li>Priority support</li>
-                        </ul>
-                        <a class="btn" href="#">Talk to sales</a>
-                    </article>
-                </div>
-            </section>
-
-            <section aria-label="Call to action">
-                <div class="cta">
-                    <div>
-                        <h2 style="margin:0 0 6px">Ready to ship your next release?</h2>
-                        <p>Start free. No credit card. Invite your team when you’re ready.</p>
+            <section id="start" aria-label="Call to action">
+                <div class="card"
+                    style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+                    <div style="min-width:260px;flex:1">
+                        <h2 style="margin:0 0 6px">Start processing documents today</h2>
+                        <p style="margin:0">No setup. Try with a sample file and see structured output instantly.</p>
                     </div>
-                    <a class="btn primary" href="#">Start free</a>
+                    <a class="btn primary" href="#" style="flex:0 0 auto">Try demo</a>
                 </div>
             </section>
         </main>
 
         <footer>
-            <small>© <span id="y"></span> FlowPilot. Built with semantic HTML.</small>
+            <small>© <span id="y"></span> DocMint. Minimal UI, maximum clarity.</small>
         </footer>
     </div>
 
     <script>
         document.getElementById("y").textContent = new Date().getFullYear();
-
-        // Show desktop Sign in button only on larger screens (keeps markup simple)
-        const desktopSignIn = document.getElementById("desktopSignIn");
-        const mq = window.matchMedia("(min-width: 761px)");
-        function sync() { desktopSignIn.style.display = mq.matches ? "inline-flex" : "none"; }
-        mq.addEventListener?.("change", sync);
-        sync();
     </script>
 </body>
 
